@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:">
+<title>KurzFiler</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div id="app" class="app">
+  <header class="toolbar" id="toolbar">
+    <div class="tb-drag"></div>
+    <div class="tb-group">
+      <button class="tb" data-cmd="new" title="New file (⌘N)"><svg viewBox="0 0 20 20"><path d="M5 2.5h6.5L16 7v10.5H5z M11.5 2.5V7H16" /></svg><span>New</span></button>
+      <button class="tb" data-cmd="open" title="Open a .krz / .k25 / .k26 file (⌘O)"><svg viewBox="0 0 20 20"><path d="M2.5 5.5h5l1.5 2h8.5v9h-15z" /></svg><span>Open</span></button>
+      <button class="tb" data-cmd="save" title="Save (⌘S)"><svg viewBox="0 0 20 20"><path d="M3.5 3.5h10l3 3v10h-13z M6.5 3.5v4h6v-4 M6 16.5v-5h8v5" /></svg><span>Save</span></button>
+    </div>
+    <div class="tb-sep"></div>
+    <div class="tb-group">
+      <button class="tb" data-cmd="undo" title="Undo (⌘Z)"><svg viewBox="0 0 20 20"><path d="M7 4.5 3.5 8 7 11.5 M3.5 8h8a5 5 0 0 1 0 10h-3" /></svg><span>Undo</span></button>
+      <button class="tb" data-cmd="redo" title="Redo (⇧⌘Z)"><svg viewBox="0 0 20 20"><path d="M13 4.5 16.5 8 13 11.5 M16.5 8h-8a5 5 0 0 0 0 10h3" /></svg><span>Redo</span></button>
+    </div>
+    <div class="tb-sep"></div>
+    <div class="tb-group">
+      <button class="tb" data-cmd="import" title="Import samples or objects from other files (⌘I)"><svg viewBox="0 0 20 20"><path d="M10 2.5v10 M6 8.5l4 4 4-4 M3.5 13.5v3h13v-3" /></svg><span>Import</span></button>
+      <button class="tb" data-cmd="exportWav" title="Export selected samples as WAV (⌘E)"><svg viewBox="0 0 20 20"><path d="M10 12.5v-10 M6 6.5l4-4 4 4 M3.5 13.5v3h13v-3" /></svg><span>Export WAV</span></button>
+    </div>
+    <div class="tb-flex"></div>
+    <label class="search"><svg viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="5"/><path d="m12.5 12.5 4 4"/></svg><input id="search" type="search" placeholder="Filter objects" spellcheck="false" autocomplete="off"></label>
+  </header>
+
+  <nav class="menubar" id="menubar" hidden></nav>
+
+  <div class="main">
+    <aside class="sidebar" id="sidebar">
+      <div class="side-title">Objects</div>
+      <ul id="typelist" class="typelist"></ul>
+      <div class="side-title">Fill mode</div>
+      <button class="fillbox" data-cmd="fillMode" id="fillbox" title="How imported objects are numbered"></button>
+      <div class="side-spacer"></div>
+      <div class="lcd" id="lcd" title="Memory the file needs in the instrument">
+        <div class="lcd-row"><span>PRAM</span><b id="lcd-pram">0</b></div>
+        <div class="lcd-row"><span>Sample RAM</span><b id="lcd-ram">0</b></div>
+        <div class="lcd-row"><span>Objects</span><b id="lcd-count">0</b></div>
+      </div>
+    </aside>
+
+    <section class="listpane" id="listpane">
+      <div class="table-wrap" id="tablewrap" tabindex="0">
+        <table class="objects" id="objects">
+          <thead><tr>
+            <th data-sort="id" class="c-id">ID</th>
+            <th data-sort="type" class="c-type">Type</th>
+            <th data-sort="name" class="c-name">Name</th>
+            <th data-sort="info" class="c-info">Info</th>
+            <th data-sort="size" class="c-size">Size</th>
+          </tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <div class="empty" id="empty">
+          <div class="empty-mark">K</div>
+          <h2>No file open</h2>
+          <p>Open a Kurzweil file (.krz, .k25, .k26), or drop files here.<br>Drop WAV or AIFF files to turn them into K2000 samples.</p>
+          <div class="empty-actions">
+            <button class="btn primary" data-cmd="open">Open File…</button>
+            <button class="btn" data-cmd="import">Import Audio…</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="inspector" id="inspector"></aside>
+  </div>
+
+  <footer class="statusbar" id="statusbar">
+    <span id="st-file">Untitled</span>
+    <span class="st-flex"></span>
+    <span id="st-sel"></span>
+  </footer>
+
+  <div class="dropzone" id="dropzone"><div>Drop to open or import</div></div>
+  <div class="toasts" id="toasts"></div>
+</div>
+
+<dialog id="dlg" class="dlg"><form method="dialog" id="dlg-form"><h3 id="dlg-title"></h3><div id="dlg-body" class="dlg-body"></div><div id="dlg-buttons" class="dlg-buttons"></div></form></dialog>
+
+<input type="file" id="filepick" multiple hidden>
+<script src="krz-core.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

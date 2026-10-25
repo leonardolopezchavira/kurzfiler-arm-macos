@@ -1,0 +1,27 @@
+KurzFiler for macOS 2.0 (Apple Silicon)
+=======================================
+
+INSTALL
+1. Drag KurzFiler.app into your Applications folder.
+2. Double-click it. The first time, macOS will say it can't verify the
+   developer, because the app isn't sold through Apple. Click "Done".
+3. Open System Settings > Privacy & Security, scroll down, and click
+   "Open Anyway" next to the KurzFiler message. Confirm with your password.
+   From then on KurzFiler opens normally, and .krz/.k25/.k26 files open in
+   it with a double-click.
+
+   (Alternative: in Terminal, run
+    xattr -dr com.apple.quarantine /Applications/KurzFiler.app )
+
+USING IT
+- Open: a .krz, .k25 or .k26 file. Choose several files to join them.
+- Import: WAV/AIFF/IFF audio becomes K2000 samples. Other Kurzweil files are
+  added too. The Fill Mode (sidebar) decides the new ID numbers.
+- Select samples, then use Object > New Instrument or New Drumset to make a
+  playable program. Set the root keys first (Set Root Key / Guess Root).
+- Save As lets you choose K2000 (.krz), K2500 (.k25) or K2600 (.k26).
+  Newer program features are removed when you save for an older instrument.
+- Space plays the selected sample. Click keys in a keymap to hear them.
+
+Free software, GNU GPL v3 or later. Based on KurzFiler by Marc Halbruegge and
+Sven Thoennissen.

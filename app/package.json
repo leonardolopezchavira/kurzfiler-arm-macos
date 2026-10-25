@@ -1,0 +1,9 @@
+{
+  "name": "kurzfiler",
+  "productName": "KurzFiler",
+  "version": "2.0.0",
+  "description": "File manager for Kurzweil K2000, K2500 and K2600 instruments",
+  "main": "main.js",
+  "license": "GPL-3.0-or-later",
+  "author": "Based on KurzFiler by Marc Halbrügge and Sven Thoennissen"
+}
